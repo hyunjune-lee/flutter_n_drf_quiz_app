@@ -93,6 +93,39 @@ class _QuizScreenState extends State<QuizScreen> {
           Column(
             children: _buildCandidates(width, quiz),
           ),
+          Container(
+            padding: EdgeInsets.all(width * 0.024),
+            child: Center(
+              child: ButtonTheme(
+                minWidth: width * 0.5,
+                height: height * 0.05,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: RaisedButton(
+                  child: _currentIndex == widget.quizs.length - 1
+                      ? Text('결과보기')
+                      : Text('다음문제'),
+                  textColor: Colors.white,
+                  color: Colors.deepPurple,
+                  onPressed: _answers[_currentIndex] == -1
+                      ? null
+                      : () {
+                          //마지막 문제라면 결과보기로 넘어가기
+                          if (_currentIndex == widget.quizs.length - 1) {
+                          } else {
+                            //마지막 퀴즈가 아니라면 _answerState를 초기화시키고
+                            //_currentIndex를 1 증가
+                            _answerState = [false, false, false, false];
+                            _currentIndex += 1;
+                            //컨트롤러로만 넘어갈 수 있음
+                            _controller.next();
+                          }
+                        },
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
