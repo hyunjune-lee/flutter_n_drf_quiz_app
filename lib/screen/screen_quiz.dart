@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:quiz_app_test/model/model_quiz.dart';
+import 'package:quiz_app_test/screen/screen_result.dart';
 import 'package:quiz_app_test/widget/widget_candidate.dart';
 
 class QuizScreen extends StatefulWidget {
@@ -113,6 +114,15 @@ class _QuizScreenState extends State<QuizScreen> {
                       : () {
                           //마지막 문제라면 결과보기로 넘어가기
                           if (_currentIndex == widget.quizs.length - 1) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ResultScreen(
+                                  answers: _answers,
+                                  quizs: widget.quizs,
+                                ),
+                              ),
+                            );
                           } else {
                             //마지막 퀴즈가 아니라면 _answerState를 초기화시키고
                             //_currentIndex를 1 증가
