@@ -2,7 +2,7 @@ History
 
 1. 가상환경 설치
 
-`python3 -m venv venv'
+python3 -m venv venv
 
 2. 가상환경 실행
 
@@ -64,5 +64,41 @@ python manage.py migrate
 
 --------------------------------
 # 배포하기
-1.
+1. 패키지 설치()
 pip install django-cors-headers gunicorn psycopg2-binary whitenoise dj-database-url
+django-cors-headers : cors 에러 방지
+gunicorn : 배포를 위한 도구
+psycopg2-binary, dj-database-url : Heroku에서 사용하는 DB인 postgresql을 위한 것
+whitenoise : 정적 파일의 사용을 돕는 미들웨어
+
+2. requirements.txt 파일 만들기 (패키지 의존성 관련 테스트 파일)
+pip freeze > requirements.txt
+
+3. myapi/settings.py 수정
+
+4. Heroku에 필요한 파일들 가져오기
+
+//heroku 할때 깃은 backend 부분에서만 한정되어서 해야함
+1. heroku 설치 및 login
+curl https://cli-assets.heroku.com/install.sh | sh
+heroku login
+
+2. heroku 프로젝트 만들기
+heroku create flutter-n-drf-quiz-app
+
+파이썬 에러 해결 url
+- [Python 3.7] CentOS 7 파이썬 3.8.1 소스 설치, 기본 설정 변경
+https://nirsa.tistory.com/112
+- Ubuntu에서 Python 버전을 변경하는 방법
+https://codechacha.com/ko/change-python-version/
+
+3.7.8
+git push heroku master
+
+- 마이그레이션
+heroku run python manage.py migrate
+
+- 배포하면서 슈퍼계정이 리셋되었으므로 다시 만들어줘야함
+heroku run python manage.py createsuperuser
+
+- 배포한 페이지에 admin 붙여서 확인하기

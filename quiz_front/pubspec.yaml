@@ -32,6 +32,8 @@ dependencies:
   flutter_swiper:
   # 퀴즈 질문이 너무 길어져서 안 넘어가게
   auto_size_text:
+  # api 통신을 위해 http 설치
+  http:
 
 dev_dependencies:
   flutter_test:
